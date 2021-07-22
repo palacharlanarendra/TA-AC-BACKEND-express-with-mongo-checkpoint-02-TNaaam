@@ -8,10 +8,30 @@
   </head>
   <body>
     <h2>Events List</h2>
-    <%events.forEach(event=>{%>
+    <h4>Categories</h4>
+    <%allCategories.forEach(event=>{%>
+    <a href="category/<%= event%>">
+      <button><%= event%></button>
+    </a>
+    <%})%>
+    <h4>Events</h4>
+    <%events.forEach(event=>{%> <%var some = event.event_category.split(",")%>
     <a href="/event/<%= event._id%>">
       <p><%= event.title%></p>
     </a>
     <%})%>
+    <h4>Location</h4>
+    <%allLocations.forEach(location=>{%>
+    <a href="location/<%= location%>">
+      <button><%= location%></button>
+    </a>
+    <%})%>
+    <h4>Sort</h4>
+    <a href="date/ascend">
+      <button>Ascend</button>
+    </a>
+    <a href="date/descend">
+      <button>Descend</button>
+    </a>
   </body>
 </html>

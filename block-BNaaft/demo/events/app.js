@@ -8,6 +8,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var eventsRouter = require('./routes/event');
 var remarkRouter = require('./routes/remark');
+var categoryRouter = require('./routes/category');
+var locationRouter = require('./routes/location');
+var dateRouter = require('./routes/date');
 //connect to db
 mongoose.connect(
   'mongodb://localhost/events',
@@ -34,6 +37,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/event', eventsRouter);
 app.use('/remark', remarkRouter);
+app.use('/category', categoryRouter);
+app.use('/location', locationRouter);
+app.use('/date', dateRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

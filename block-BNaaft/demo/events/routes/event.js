@@ -7,7 +7,27 @@ var Remark = require('../models/remarks');
 router.get('/', function (req, res, next) {
   Event.find({}, (err, events) => {
     if (err) return next(err);
-    res.render('eventsPage', { events: events });
+    var allCategories = [];
+    events.filter((event) => {
+      var some = event.event_category.split(',');
+      for (var i = 0; i < some.length; i++) {
+        if (!allCategories.includes(some[i])) {
+          allCategories.push(some[i]);
+        }
+      }
+    });
+
+    var allLocations = [];
+    events.filter((event) => {
+      if (!allLocations.includes(event.location)) {
+        allLocations.push(event.location);
+      }
+    });
+    res.render('eventsPage', {
+      events: events,
+      allCategories: allCategories,
+      allLocations: allLocations,
+    });
   });
 });
 router.get('/new', function (req, res) {
